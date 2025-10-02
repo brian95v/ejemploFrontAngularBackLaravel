@@ -1,0 +1,108 @@
+<div class="register-container">
+    <h2 class="text-center mb-4">Registro de Usuario</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Apellido</label>
+                <input type="text" class="form-control" formControlName="apellido">
+                @if (registerForm.get('apellido')?.invalid && registerForm.get('apellido')?.touched) {
+                <div class="invalid-feedback">Apellido requerido, mínimo 3 caracteres</div>
+                }
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" formControlName="nombre">
+                @if (registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched) {
+                <div class="invalid-feedback">Nombre requerido, mínimo 3 caracteres</div>
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Documento</label>
+                <input type="number" class="form-control" formControlName="documento">
+                @if (registerForm.get('documento')?.invalid && registerForm.get('documento')?.touched) {
+                <div class="invalid-feedback">Documento inválido, mínimo 8 digitos</div>
+                }
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" formControlName="telefono">
+                @if (registerForm.get('telefono')?.invalid && registerForm.get('telefono')?.touched) {
+                <div class="invalid-feedback">Teléfono requerido, mínimo 6 caracteres</div>
+                }
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Domicilio</label>
+            <input type="text" class="form-control" formControlName="domicilio">
+            @if (registerForm.get('domicilio')?.invalid && registerForm.get('domicilio')?.touched) {
+            <div class="invalid-feedback">Domicilio requerido, mínimo 3 caracteres</div>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Localidad</label>
+            <input type="text" class="form-control" formControlName="localidad">
+            @if (registerForm.get('localidad')?.invalid && registerForm.get('localidad')?.touched) {
+            <div class="invalid-feedback">Localidad requerida, ingrese una localidad y seleccione del listado</div>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Rol</label>
+            <select class="form-select" formControlName="rol">
+                <option value="" selected disabled>Selecciona tu rol</option>
+                <option value="estudiante">Estudiante</option>
+                <option value="admin">Administrador</option>
+            </select>
+            @if (registerForm.get('rol')?.invalid && registerForm.get('rol')?.touched) {
+            <div class="invalid-feedback">Rol requerido</div>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" placeholder="nombre@ejemplo.com" formControlName="email">
+            @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+            <div class="invalid-feedback">Email inválido</div>
+            }
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Contraseña</label>
+                <input type="password" class="form-control" formControlName="password">
+                @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+                <div class="invalid-feedback">Campo requerido, mínimo 8 caracteres</div>
+                }
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Confirmar Contraseña</label>
+                <input type="password" class="form-control" formControlName="confirmPassword">
+                @if (registerForm.errors?.['passwordMismatch'] &&
+                (registerForm.get('password')?.dirty || registerForm.get('confirmPassword')?.touched)) {
+                <div class="invalid-feedback">Las contraseñas no coinciden</div>
+                }
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100" [disabled]="envData">
+            
+            @if (envData) {
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            }
+            
+            Registrarse
+        </button>
+
+        <div class="text-center mt-3">
+            <span class="text-muted">¿Ya tienes cuenta? </span>
+            <a class="text-decoration-none" routerLink="/login">Iniciar Sesión</a>
+        </div>
+    </form>
+
+    <pre>{{registerForm.value | json}}</pre>
+</div>

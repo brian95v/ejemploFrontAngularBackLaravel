@@ -1,0 +1,6 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    min-height: 72vh; /* Asegura que el body ocupe al menos la altura de la ventana */
+    flex: 1;/* Permite que el contenido ocupe el espacio disponible */
+}

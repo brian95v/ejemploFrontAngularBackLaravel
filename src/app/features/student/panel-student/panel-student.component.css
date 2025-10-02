@@ -1,0 +1,19 @@
+.career-card {
+    transition: transform 0.2s;
+    margin-bottom: 20px;
+}
+
+.career-card:hover {
+    transform: translateY(-5px);
+}
+
+.subject-badge {
+    font-size: 0.8rem;
+    margin: 2px;
+}
+
+.user-info {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}

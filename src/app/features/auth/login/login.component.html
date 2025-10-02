@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="login-container">
+        <h2 class="text-center mb-4">Iniciar Sesión</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="nombre@ejemplo.com" formControlName="email">
+                @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+                <div class="invalid-feedback">Email inválido.</div>
+                }
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Contraseña</label>
+                <input type="password" class="form-control" placeholder="Ingresa tu contraseña"
+                    formControlName="password">
+                @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+                <div class="invalid-feedback">Contraseña mínimo 8 caracteres.</div>
+                }
+            </div>
+
+            @if (verFeedback) {
+            <div class="alert alert-warning text-center" role="alert">
+                {{dataFeedback}}
+            </div>
+            }
+
+            <button type="submit" class="btn btn-primary w-100 mt-2" [disabled]="envData">
+                
+                @if (envData) {
+                <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                }
+                
+                Iniciar Sesión
+            </button>
+            <div class="text-center mt-3">
+                <span class="text-muted">¿No tienes usuario? </span>
+                <a class="text-decoration-none" routerLink="/register">Registrate aquí</a>
+            </div>
+        </form>
+    </div>
+</div>
