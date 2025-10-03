@@ -29,7 +29,7 @@ export class PanelAdminComponent implements OnInit {
     this.carreraService.getAllCarreras().subscribe({
       next: (data) => {
         this.carreras = data;
-        console.log(this.carreras);
+        //console.log(this.carreras);
       },
       error: (e) => {
         console.log(e);

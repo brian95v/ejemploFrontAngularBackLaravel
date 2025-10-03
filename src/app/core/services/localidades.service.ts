@@ -10,7 +10,11 @@ export class LocalidadesService {
 
   constructor() { }
 
-  getLocalidades(): Observable<any>{
-    return this.http.get<any[]>("https://apis.datos.gob.ar/georef/api/localidades?provincia=Entre%20Rios&orden=nombre&aplanar=true&campos=id%2C%20nombre%2C%20departamento&max=500&inicio=0&exacto=true&formato=json");
+  getProvincias(): Observable<any>{
+    return this.http.get<any[]>("https://apis.datos.gob.ar/georef/api/provincias?orden=nombre&aplanar=true&campos=basico&max=50&inicio=0&exacto=true&formato=json");
+  }
+
+  getLocalidades(idProvincia: number): Observable<any>{
+    return this.http.get<any[]>(`https://apis.datos.gob.ar/georef/api/localidades?provincia=${idProvincia}&orden=nombre&aplanar=true&campos=id%2C%20nombre%2C%20departamento&max=500&inicio=0&exacto=true&formato=json`);
   }
 }

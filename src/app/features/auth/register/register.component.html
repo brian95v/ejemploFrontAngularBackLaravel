@@ -1,3 +1,4 @@
+@if (verFormulario){
 <div class="register-container">
     <h2 class="text-center mb-4">Registro de Usuario</h2>
     <form [formGroup]="registerForm" (ngSubmit)="register()">
@@ -44,10 +45,26 @@
         </div>
 
         <div class="mb-3">
+            <label class="form-label">Provincia</label>
+            <select class="form-select" formControlName="provincia" (change)="onProvinciaChange()">
+                @for ( prov of provincias; track prov.id) {
+                <option value="{{prov.id}}">{{prov.nombre}}</option>
+                }
+            </select>
+            @if (registerForm.get('provincia')?.invalid && registerForm.get('provincia')?.touched) {
+            <div class="invalid-feedback">Provincia requerida.</div>
+            }
+        </div>
+
+        <div class="mb-3">
             <label class="form-label">Localidad</label>
-            <input type="text" class="form-control" formControlName="localidad">
+            <select class="form-select" formControlName="localidad">
+                @for ( loc of localidades; track loc.id) {
+                <option value="{{loc.id}}">{{loc.nombre}}</option>
+                }
+            </select>
             @if (registerForm.get('localidad')?.invalid && registerForm.get('localidad')?.touched) {
-            <div class="invalid-feedback">Localidad requerida, ingrese una localidad y seleccione del listado</div>
+            <div class="invalid-feedback">Localidad requerida. Primero debe seleccionar una provincia</div>
             }
         </div>
 
@@ -90,11 +107,11 @@
         </div>
 
         <button type="submit" class="btn btn-success w-100" [disabled]="envData">
-            
+
             @if (envData) {
             <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
             }
-            
+
             Registrarse
         </button>
 
@@ -104,5 +121,22 @@
         </div>
     </form>
 
-    <pre>{{registerForm.value | json}}</pre>
+    <!-- <pre>{{registerForm.value | json}}</pre> -->
 </div>
+}
+
+<!-- Mensaje de Registro Exitoso -->
+@if (verRegistroExitoso) {
+<div class="position-absolute top-50 start-50 translate-middle text-center py-4">
+    <div class="text-success mb-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+            class="bi bi-check-circle-fill success" viewBox="0 0 16 16">
+            <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+        </svg>
+    </div>
+    <h3 class="text-success mb-3">¡Registro Exitoso!</h3>
+    <p class="lead">Tu registro se ha completado correctamente.</p>
+
+</div>
+}
